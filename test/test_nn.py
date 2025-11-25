@@ -17,6 +17,7 @@ from collections.abc import MutableSequence
 
 import pytest
 import torch
+from _utils_internal import is_npu_available
 
 from tensordict import (
     is_tensor_collection,
@@ -57,7 +58,6 @@ from tensordict.nn.utils import (
     skip_existing,
 )
 from tensordict.tensorclass import TensorClass
-from _utils_internal import is_npu_available
 
 from torch import distributions, nn
 from torch.distributions import Categorical, Normal
@@ -2186,6 +2186,7 @@ def test_module_buffer():
 )
 def test_to_context(original_device, new_device, tc):
     if tc:
+
         class MyTC(TensorClass):
             x: torch.Tensor
             y: torch.Tensor | None = None
